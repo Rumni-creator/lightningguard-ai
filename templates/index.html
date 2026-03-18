@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LightningGuard AI ⚡</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #ffffff;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #ff7a00;
+        }
+        input {
+            padding: 10px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #00ff88;
+            border: none;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>⚡ LightningGuard AI</h1>
+    <p>Analyze Bitcoin wallet risk</p>
+
+    <input id="address" placeholder="Enter Bitcoin address"/>
+    <br><br>
+    <button onclick="analyze()">Analyze</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        async function analyze() {
+            const address = document.getElementById("address").value;
+            const res = await fetch(`/analyze/${address}`);
+            const data = await res.json();
+
+            document.getElementById("result").innerText =
+                "Risk: " + (data.risk || data.error);
+        }
+    </script>
+
+</body>
+</html>
